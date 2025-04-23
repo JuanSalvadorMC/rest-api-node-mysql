@@ -1,6 +1,6 @@
 # CRUD SQL/NodeJS
 
-**REST API for category management** using **Node.js** and **MySQL**.
+**REST API for category management** using **Node.js**, **TypeScript** and **MySQL**.
 
 ---
 
@@ -17,11 +17,16 @@
    npm install
    ```
 
-3. Configure the database connection in `dbconfig.js`.
+3. Configure the database connection in `dbconfig.ts`.
 
-4. Start the server:
+4. Build and start the server:
    ```bash
+   npm run build
    npm start
+   ```
+   O para desarrollo:
+   ```bash
+   npm run dev
    ```
 
 ---
@@ -45,6 +50,7 @@ You can test the endpoints using **Postman**, **Insomnia**, or **curl**.
 - ✅ Express's native body parser is used (no need for `body-parser`).
 - ❌ The `mssql` dependency has been removed.
 - 📂 Example SQL scripts are in: `docs/SQL.sql`.
+- 🟦 El proyecto está migrado a TypeScript y usa las últimas versiones de Express, CORS y Nodemon.
 
 ## Database Setup
 
@@ -116,10 +122,13 @@ END;
 - **express**: Minimal and flexible Node.js web application framework.
 - **cors**: Middleware to enable Cross-Origin Resource Sharing.
 - **mysql2**: MySQL client for Node.js with Promise support.
+- **typescript**: TypeScript support for type safety and modern JS features.
 
 ### Dev Dependencies
 
 - **nodemon**: Utility that monitors for changes in your source and automatically restarts your server.
+- **ts-node**: Run TypeScript files directly.
+- **@types/**: Type definitions for TypeScript.
 
 ---
 

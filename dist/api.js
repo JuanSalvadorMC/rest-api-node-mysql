@@ -40,7 +40,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const mysql = __importStar(require("mysql2/promise"));
 const dbconfig_1 = __importDefault(require("./dbconfig"));
-const routes_categoria_1 = __importDefault(require("./routes-categoria"));
+const categoria_routes_1 = __importDefault(require("./categoria.routes"));
 // Test DB connection on startup
 (async () => {
     try {
@@ -57,7 +57,7 @@ const app = (0, express_1.default)();
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
-app.use('/api', routes_categoria_1.default);
+app.use('/api', categoria_routes_1.default);
 const port = process.env.PORT || 8090;
 app.listen(port, () => {
     console.log('Category API started on port: ' + port);
