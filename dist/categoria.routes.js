@@ -36,7 +36,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const dbocategoria = __importStar(require("./categoria.db"));
 const router = (0, express_1.Router)();
-// Get all categories
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Categoria:
+ *       type: object
+ *       properties:
+ *         cat_id:
+ *           type: integer
+ *         cat_nombre:
+ *           type: string
+ */
+/**
+ * @swagger
+ * /api/categoria:
+ *   get:
+ *     tags: [Categoríasx]
+ *     summary: Obtener todas las categorías d
+ *     description: Retorna una lista de todas las categoríasx
+ *     responses:
+ *       200:
+ *         description: Lista de categorías x
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Categoria'
+ *       500:
+ *         description: Error del servidor
+ */
 router.get('/categoria', async (_req, res) => {
     try {
         const result = await dbocategoria.getCategoria();
@@ -47,7 +77,32 @@ router.get('/categoria', async (_req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-// Get category by id
+/**
+ * @swagger
+ * /api/categoria/{id}:
+ *   get:
+ *     tags: [Categorías]
+ *     summary: Obtener una categoría por ID
+ *     description: Retorna una categoría específica por su ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría encontrada
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Categoria'
+ *       404:
+ *         description: Categoría no encontrada
+ *       500:
+ *         description: Error del servidor
+ */
 router.get('/categoria/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id, 10);
@@ -64,7 +119,35 @@ router.get('/categoria/:id', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-// Create new category
+/**
+ * @swagger
+ * /api/categoria:
+ *   post:
+ *     tags: [Categorías]
+ *     summary: Crear una nueva categoría
+ *     description: Crea una nueva categoría en el sistema
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - cat_nombre
+ *             properties:
+ *               cat_nombre:
+ *                 type: string
+ *                 description: Nombre de la categoría
+ *     responses:
+ *       201:
+ *         description: Categoría creada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Categoria'
+ *       500:
+ *         description: Error del servidor
+ */
 router.post('/categoria', async (req, res) => {
     try {
         const categoria = { ...req.body };
@@ -76,7 +159,44 @@ router.post('/categoria', async (req, res) => {
         res.status(500).json({ message: 'Error creating category' });
     }
 });
-// Update category
+/**
+ * @swagger
+ * /api/categoria/{id}:
+ *   put:
+ *     tags: [Categorías]
+ *     summary: Actualizar una categoría
+ *     description: Actualiza una categoría existente por su ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID de la categoría a actualizar
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - cat_nombre
+ *             properties:
+ *               cat_nombre:
+ *                 type: string
+ *                 description: Nuevo nombre de la categoría
+ *     responses:
+ *       200:
+ *         description: Categoría actualizada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Categoria'
+ *       404:
+ *         description: Categoría no encontrada
+ *       500:
+ *         description: Error del servidor
+ */
 router.put('/categoria/:id', async (req, res) => {
     try {
         const categoria = { ...req.body, cat_id: parseInt(req.params.id, 10) };
@@ -93,7 +213,37 @@ router.put('/categoria/:id', async (req, res) => {
         res.status(500).json({ message: 'Error updating category' });
     }
 });
-// Delete category
+/**
+ * @swagger
+ * /api/categoria/{id}:
+ *   delete:
+ *     tags: [Categorías]
+ *     summary: Eliminar una categoría
+ *     description: Elimina una categoría por su ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID de la categoría a eliminar
+ *     responses:
+ *       200:
+ *         description: Categoría eliminada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 deleted:
+ *                   $ref: '#/components/schemas/Categoria'
+ *       404:
+ *         description: Categoría no encontrada
+ *       500:
+ *         description: Error del servidor
+ */
 router.delete('/categoria/:id', async (req, res) => {
     try {
         const cat_id = parseInt(req.params.id, 10);
