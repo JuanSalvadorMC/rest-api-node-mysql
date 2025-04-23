@@ -1,5 +1,5 @@
 {
-  "name": "PERSONAL_ApiSQLSP",
+  "name": "ApiNodeJsMysql",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
