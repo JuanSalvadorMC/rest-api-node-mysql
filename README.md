@@ -1,55 +1,54 @@
-# 📦 CRUD SQL/NodeJS
+# CRUD SQL/NodeJS
 
-**API REST para gestión de categorías** usando **Node.js** y **MySQL**.
-
+**REST API for category management** using **Node.js** and **MySQL**.
 
 ---
 
-## 🚀 Instalación rápida
+## 🚀 Quick Installation
 
-1. Clona el repositorio:
+1. Clone the repository:
    ```bash
    git clone https://github.com/JuanSalvadorMC/rest-api-node-mysql
    cd ApiNodeJsMysql
    ```
 
-2. Instala las dependencias:
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-3. Configura la conexión a la base de datos en `dbconfig.js`.
+3. Configure the database connection in `dbconfig.js`.
 
-4. Inicia el servidor:
+4. Start the server:
    ```bash
    npm start
    ```
 
 ---
 
-## 🔌 Endpoints disponibles
+## 🔌 Available Endpoints
 
-| Método | Ruta                    | Descripción                           |
-|--------|-------------------------|---------------------------------------|
-| GET    | `/api/categoria`        | Lista todas las categorías            |
-| GET    | `/api/categoria/:id`    | Obtiene una categoría por ID          |
-| POST   | `/api/categoria`        | Crea una nueva categoría              |
-| PUT    | `/api/categoria/:id`    | Actualiza una categoría existente     |
-| DELETE | `/api/categoria/:id`    | Elimina una categoría y devuelve info |
+| Method | Route                  | Description                          |
+|--------|------------------------|--------------------------------------|
+| GET    | `/api/categoria`       | List all categories                  |
+| GET    | `/api/categoria/:id`   | Get a category by ID                 |
+| POST   | `/api/categoria`       | Create a new category                |
+| PUT    | `/api/categoria/:id`   | Update an existing category          |
+| DELETE | `/api/categoria/:id`   | Delete a category and return info    |
 
-📫 Puedes probar los endpoints usando **Postman**, **Insomnia** o **curl**.
+You can test the endpoints using **Postman**, **Insomnia**, or **curl**.
 
 ---
 
-## 📝 Notas adicionales
+## 📝 Additional Notes
 
-- ✅ El body parser es ahora **nativo de Express** (no requiere `body-parser`).
-- ❌ Se eliminó la dependencia de `mssql`.
-- 📂 Los scripts SQL de ejemplo están en: `docs/SQL.sql`.
+- ✅ Express's native body parser is used (no need for `body-parser`).
+- ❌ The `mssql` dependency has been removed.
+- 📂 Example SQL scripts are in: `docs/SQL.sql`.
 
-## Configuración de la Base de Datos
+## Database Setup
 
-1. Crea la base de datos y la tabla ejecutando el siguiente script en tu gestor de MySQL:
+1. Create the database and table by running the following script in your MySQL client:
 
 ```sql
 CREATE DATABASE DBTEST2;
@@ -62,16 +61,16 @@ CREATE TABLE TM_CATEGORIA (
 );
 ```
 
-2. Crea los procedimientos almacenados (SPs):
+2. Create the stored procedures (SPs):
 
 ```sql
--- Listar todas las categorías
+-- List all categories
 CREATE PROCEDURE SP_L_CATEGORIA_01()
 BEGIN
     SELECT * FROM TM_CATEGORIA;
 END;
 
--- Insertar una nueva categoría
+-- Insert a new category
 CREATE PROCEDURE SP_I_CATEGORIA_01(
     IN CAT_NOM VARCHAR(50),
     IN CAT_OBS VARCHAR(150)
@@ -81,7 +80,7 @@ BEGIN
     SELECT * FROM TM_CATEGORIA;
 END;
 
--- Actualizar una categoría
+-- Update a category
 CREATE PROCEDURE SP_U_CATEGORIA_01(
     IN CAT_ID INT,
     IN CAT_NOM VARCHAR(50),
@@ -92,7 +91,7 @@ BEGIN
     SELECT * FROM TM_CATEGORIA;
 END;
 
--- Obtener una categoría por ID
+-- Get a category by ID
 CREATE PROCEDURE SP_CATEGORIA_X_ID(
     IN CAT_ID INT
 )
@@ -100,7 +99,7 @@ BEGIN
     SELECT * FROM TM_CATEGORIA WHERE CAT_ID = CAT_ID;
 END;
 
--- Eliminar una categoría por ID
+-- Delete a category by ID
 CREATE PROCEDURE SP_D_CATEGORIA_01(
     IN CAT_ID INT
 )
@@ -110,39 +109,25 @@ BEGIN
 END;
 ```
 
-## Dependencias y Descripción
+> You can find these scripts in `docs/SQL.sql` and run them in your MySQL database before starting the API.
 
-```
-"dependencies": {
-    "body-parser": "^1.19.0",
+## 📦 Dependencies
 
-    Los desarrolladores quienes implementan servidores, 
-    requieren frecuentemente accesar a la 
-    información del cuerpo de dicha petición.
+- **express**: Minimal and flexible Node.js web application framework.
+- **cors**: Middleware to enable Cross-Origin Resource Sharing.
+- **mysql2**: MySQL client for Node.js with Promise support.
 
-    "cors": "2.8.1",
+### Dev Dependencies
 
-    Es un mecanismo que utiliza cabeceras HTTP adicionales para permitir 
-    que un user agent obtenga permiso para acceder a recursos seleccionados 
-    desde un servidor, en un origen distinto (dominio) al que pertenece.
+- **nodemon**: Utility that monitors for changes in your source and automatically restarts your server.
 
-    "express": "^4.17.1",
+---
 
-    Espress.js, según sus creadores, es un framework de desarrollo de aplicaciones 
-    web minimalista y flexible para Node.js". Está inspirado en Sinatra, 
-    además es robusto, rápido, flexible y muy simple. Entre otras características, 
-    ofrece Router de URL (Get, Post, Put …), 
-    facilidades para motores de plantillas (Jade, EJS, JinJS …), 
-    Middeleware via Connect y un buen test coverage
+## 🗑️ Removed/Obsolete
 
-    "mssql": "^6.2.1"
+- The `mssql` and `body-parser` dependencies are no longer required.
+- Any SQL scripts or files not referenced above have been removed for clarity and maintenance.
 
-    Para SQL SERVER
-},
-"devDependencies": {
-    "nodemon": "^2.0.4"
+---
 
-    Nodemon es una utilidad que monitorea los cambios en el código fuente que se esta 
-    desarrollando y automáticamente re inicia el servidor.
-},
-```
+Feel free to contribute or open issues if you find any problems!
