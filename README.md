@@ -1,4 +1,4 @@
-# 📦 CRUDSQL_NodeJS
+# 📦 CRUD SQL/NodeJS
 
 **API REST para gestión de categorías** usando **Node.js** y **MySQL**.
 
@@ -109,8 +109,6 @@ BEGIN
     DELETE FROM TM_CATEGORIA WHERE CAT_ID = CAT_ID;
 END;
 ```
-
-> Puedes encontrar estos scripts en `docs/SQL.sql` y ejecutarlos en tu base de datos MySQL antes de iniciar la API.
 
 ## Dependencias y Descripción
 
